@@ -21,15 +21,16 @@ public class DictionaryManagement
             Word newWord = new Word(word, meaning);
             dict.addWord(newWord);
         }
+        input.close();
     }
     
     public void showAllWord()
     {
         ArrayList<Word> dictionary = dict.getDatabase();
-        System.out.println("No." + "\t" + "English" + "\t\t" + "Vietnamese");
+        System.out.format("%-10s%-32s%-32s%n", "No.", "English", "Vietnamese");
         for (int i = 0; i < dictionary.size(); i++)
         {
-            System.out.println(i+1 + "\t" + dictionary.get(i).getWord_target() + "\t\t" + dictionary.get(i).getWord_explain());
+            System.out.format("%-10d%-32s%-32s%n", i + 1, dictionary.get(i).getWord_target(), dictionary.get(i).getWord_explain());
         }
     }
 }
