@@ -5,9 +5,9 @@ public class VietlishDictionary {
 
     public static void main(String[] args) 
     {
-        DictionaryManagement DN = new DictionaryManagement();
-        DN.insertFromCommandLine();
-        DN.showAllWord();
+        DictionaryManagement tuDien = new DictionaryManagement();
+        tuDien.insertFromCommandLine();
+        tuDien.showAllWord();
     }
     
 }
