@@ -9,8 +9,8 @@ public class VietlishDictionary {
         
         tuDien.insertFromCommandLine();
         tuDien.insertFromFile();
+        tuDien.dictionaryLookup();
         tuDien.showAllWord();
-        //tuDien.dictionaryLookup();
     }
     
 }

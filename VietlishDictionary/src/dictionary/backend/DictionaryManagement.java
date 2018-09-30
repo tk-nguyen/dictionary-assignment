@@ -24,7 +24,7 @@ public class DictionaryManagement
 	            
 	            dict.addWord(new Word(word, meaning));
 	        }
-	        input.close();
+	        
         }
         catch (Exception ex)
         {
@@ -79,28 +79,40 @@ public class DictionaryManagement
         }
     }
     
-    /* Hàm tra cứu các từ trong từ điển 
-     * Đang debug dở, push tạm để làm việc khác
     public void dictionaryLookup()
     {
-    	System.out.println("Viết từ mà bạn cần tra: ");
-    	Scanner scan = new Scanner(System.in);
-    	String lookup = scan.nextLine();
-    	scan.close();
-       	
-    	
-    	boolean exist = false;
-    	
-    	for (int i = 0; i < dictionary.size(); i++) 
+    	try
     	{
-    		if (dictionary.get(i).getWord_target().equals(lookup))
-    		{
-    			System.out.println(dictionary.get(i).getWord_explain());
-    			exist = true;
-    			break;
-    		}
+    		System.out.print("Viết từ mà bạn cần tra: ");
+    		
+    		Scanner scan = new Scanner(System.in);
+	    	String lookup = scan.nextLine();     
+	    	lookup.toLowerCase();
+	    	
+	    	//Bỏ khoảng trắng trong từ mà người dùng nhập vào
+	    	StringBuilder corrected = new StringBuilder();
+	    	for (int i = 0; i < lookup.length(); i++)
+	    		if (Character.isAlphabetic(lookup.charAt(i)) ) corrected.append(lookup.charAt(i));
+	    	lookup = corrected.toString();
+	    	
+	    	boolean exist = false;
+	    	
+	    	for (int i = 0; i < dictionary.size(); i++) 
+	    	{
+	    		if (dictionary.get(i).getWord_target().equals(lookup))
+	    		{
+	    			System.out.println(dictionary.get(i).getWord_explain());
+	    			exist = true;
+	    			break;
+	    		}
+	    	}
+	    	if (!exist)	System.out.println("Không tồn tại từ đó trong từ điển");
+	    	scan.close();
     	}
-    	if (!exist)	System.out.println("Không tồn tại từ đó trong từ điển");
+    	catch (Exception ex)
+    	{
+    		System.out.println("Lỗi đọc command line: " + ex);
+    	}
     }
-    */
+    
 }
