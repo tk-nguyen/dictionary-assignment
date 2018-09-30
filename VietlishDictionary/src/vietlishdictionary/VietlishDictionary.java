@@ -7,6 +7,7 @@ public class VietlishDictionary {
     {
         DictionaryManagement tuDien = new DictionaryManagement();
         tuDien.insertFromCommandLine();
+        tuDien.insertFromFile();
         tuDien.showAllWord();
     }
     

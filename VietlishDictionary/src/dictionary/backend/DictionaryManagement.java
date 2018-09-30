@@ -1,6 +1,7 @@
 package dictionary.backend;
 
 import java.util.*;
+import java.io.*;
 
 public class DictionaryManagement 
 {
@@ -22,6 +23,35 @@ public class DictionaryManagement
         }
         input.close();
     }
+    /*
+    Đọc dữ liệu từ file dictionaries.txt
+    Target và meaning ngăn cách bởi tab
+    Sử dụng String.split("\t") để tách String thành String[], bỏ dấu tab
+    */
+    
+    public void insertFromFile()
+    {
+        try
+        {
+            File file = new File("dictionaries.txt");
+            Scanner scan;
+            scan = new Scanner(new BufferedReader(new FileReader(file)));
+            
+            while (scan.hasNext())
+            {
+                String w = scan.nextLine();
+                String[] word;
+                word = w.split("\t");
+                String target = word[0];
+                String meaning = word[1];
+                dict.addWord(new Word(target, meaning));
+            }            
+            scan.close();            
+        } catch (Exception ex)
+        {
+            System.out.println("Loi doc file: " + ex);
+        }
+    }
     
     public void showAllWord()
     {
@@ -31,10 +61,10 @@ public class DictionaryManagement
         //Gióng theo hàng dọc bên trái
         
         /* Output nhìn sẽ như thế này
-         No.       English                         Vietnamese                      
-		 1         apple                           quả táo                         
+             No.       English                         Vietnamese                      
+             1         apple                           quả táo                         
 	     2         pear                            quả lê   
-	     3		   notebook						   quyển vở
+	     3         notebook                        quyển vở
 	     4		   ...							   ...                    
         */
       
