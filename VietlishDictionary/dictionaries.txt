@@ -1,3 +1,3 @@
-apple	qua tao
-pear	qua le
-notebook	quyen vo
+﻿apple	quả táo
+pear	quả lê
+notebook	quyển vở
