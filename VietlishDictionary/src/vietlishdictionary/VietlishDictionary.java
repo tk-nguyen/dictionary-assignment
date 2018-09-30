@@ -6,9 +6,11 @@ public class VietlishDictionary {
     public static void main(String[] args) 
     {
         DictionaryManagement tuDien = new DictionaryManagement();
+        
         tuDien.insertFromCommandLine();
         tuDien.insertFromFile();
         tuDien.showAllWord();
+        //tuDien.dictionaryLookup();
     }
     
 }

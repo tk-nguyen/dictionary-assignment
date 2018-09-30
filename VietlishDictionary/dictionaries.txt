@@ -1,3 +1,6 @@
-﻿apple	quả táo
+animal	động vật
 pear	quả lê
 notebook	quyển vở
+bear	con gấu
+dog	con chó
+apple	quả táo
