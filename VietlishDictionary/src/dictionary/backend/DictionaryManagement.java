@@ -21,8 +21,9 @@ public class DictionaryManagement
 	            
 	            String word = input.nextLine();
 	            String meaning = input.nextLine();
+	            String pronounce = input.nextLine();
 	            
-	            dict.addWord(new Word(word, meaning));
+	            dict.addWord(new Word(word, meaning, pronounce));
 	        }
 	        
         }
@@ -48,8 +49,8 @@ public class DictionaryManagement
             while (scan.hasNext())
             {
                 String w = scan.nextLine();
-                String[] word = w.split("\\s+", 2);
-                dict.addWord(new Word(word[0], word[1]));
+                String[] word = w.split("\\s+", 3);
+                dict.addWord(new Word(word[0], word[1], word[2]));
             }            
             scan.close();
         } 
@@ -72,10 +73,10 @@ public class DictionaryManagement
 	     4		   ...							   ...                    
         */
     	dictionary.sort(null);
-        System.out.format("%-10s%-32s%-32s%n", "No.", "English", "Vietnamese");
+        System.out.format("%-10s%-32s%-32s%-32s%n", "No.", "English", "Pronunciation", "Vietnamese");
         for (int i = 0; i < dictionary.size(); i++)
         {
-            System.out.format("%-10d%-32s%-32s%n", i + 1, dictionary.get(i).getWord_target(), dictionary.get(i).getWord_explain());
+            System.out.format("%-10d%-32s%-32s%-32s%n", i + 1, dictionary.get(i).getWord_target(),dictionary.get(i).getWord_pronounce(), dictionary.get(i).getWord_explain());
         }
     }
     
@@ -101,6 +102,7 @@ public class DictionaryManagement
 	    	{
 	    		if (dictionary.get(i).getWord_target().equals(lookup))
 	    		{
+	    			System.out.println(dictionary.get(i).getWord_pronounce());
 	    			System.out.println(dictionary.get(i).getWord_explain());
 	    			exist = true;
 	    			break;
