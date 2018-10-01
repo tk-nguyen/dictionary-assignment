@@ -1,6 +1,6 @@
-animal	động vật
-pear	quả lê
-notebook	quyển vở
-bear	con gấu
-dog	con chó
-apple	quả táo
+animal	/ˈanɪm(ə)l/		động vật
+pear	/pɛː/	quả lê
+notebook	/ˈnəʊtbʊk/	quyển vở
+bear	/bɛː/ 	con gấu
+dog	/dɒɡ/	con chó
+apple	/ˈap(ə)l/	quả táo
