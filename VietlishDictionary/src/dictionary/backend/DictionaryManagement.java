@@ -5,38 +5,14 @@ import java.io.*;
 
 public class DictionaryManagement 
 {
-    private Dictionary dict = new Dictionary();
+    protected Dictionary dict = new Dictionary();
     private ArrayList<Word> dictionary = dict.getDatabase();
 	
-    public void insertFromCommandLine()
-    {
-        try 
-        {
-	    	Scanner input = new Scanner(System.in);
-	        int numberOfWord = input.nextInt();
-	        
-	        input.nextLine();
-	        for (int i = 0; i < numberOfWord; i++)
-	        {
-	            
-	            String word = input.nextLine();
-	            String meaning = input.nextLine();
-	            String pronounce = input.nextLine();
-	            
-	            dict.addWord(new Word(word, meaning, pronounce));
-	        }
-	        
-        }
-        catch (Exception ex)
-        {
-        	System.out.println("Lỗi đọc từ command line: " + ex);
-        }
-    }
     /*
-    Đọc dữ liệu từ file dictionaries.txt
-    Target và meaning ngăn cách bởi tab
-    Sử dụng String.split("\\s+") để tách String thành String[], bỏ tất cả khoảng trắng giữa từ và nghĩa
-    */
+     * Đọc dữ liệu từ file dictionaries.txt
+     * Target và meaning ngăn cách bởi tab
+     * Sử dụng String.split("\\s+") để tách String thành String[], bỏ tất cả khoảng trắng giữa từ và nghĩa
+     */
     
     public void insertFromFile()
     {
@@ -66,12 +42,14 @@ public class DictionaryManagement
         //Gióng theo hàng dọc bên trái
         
         /* Output nhìn sẽ như thế này
-         No.       English                         Vietnamese                      
-         1         apple                           quả táo                         
-	     2         pear                            quả lê   
-	     3         notebook                        quyển vở
-	     4		   ...							   ...                    
-        */
+         *	
+         * No.       English                         Pronunciation                   Vietnamese                      
+         * 1         animal                          /ˈanɪm(ə)l/                     động vật                        
+         * 2         apple                           /ˈap(ə)l/                       quả táo                         
+         * 3         bear                            /bɛː/                           con gấu                         
+         * 4         dog                             /dɒɡ/                           con chó       
+         * .		 ...							 ...							   ...               
+         */
     	dictionary.sort(null);
         System.out.format("%-10s%-32s%-32s%-32s%n", "No.", "English", "Pronunciation", "Vietnamese");
         for (int i = 0; i < dictionary.size(); i++)
@@ -109,7 +87,6 @@ public class DictionaryManagement
 	    		}
 	    	}
 	    	if (!exist)	System.out.println("Không tồn tại từ đó trong từ điển");
-	    	scan.close();
     	}
     	catch (Exception ex)
     	{
