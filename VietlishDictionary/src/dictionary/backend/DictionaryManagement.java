@@ -5,8 +5,9 @@ import java.io.*;
 
 public class DictionaryManagement 
 {
-    protected Dictionary dict = new Dictionary();
-    private ArrayList<Word> dictionary = dict.getDatabase();
+	protected Dictionary dict = new Dictionary();
+    private ArrayList<Word> loadedDatabase = dict.getDatabase();
+    protected ArrayList<Word> addToDatabase = new ArrayList<Word>();
     private File file = new File("dictionaries.txt");
     /*
      * Đọc dữ liệu từ file dictionaries.txt
@@ -42,9 +43,9 @@ public class DictionaryManagement
         {
             FileWriter fw = new FileWriter(file, true);
             
-            for(int i = 0; i < dictionary.size(); i++)
+            for(int i = 0; i < addToDatabase.size(); i++)
             {
-                Word w = dictionary.get(i);
+                Word w = addToDatabase.get(i);
                 fw.write(w.getWord_target()    + "\t"
                         +w.getWord_pronounce() + "\t"
                         +w.getWord_explain()   + "\n");
@@ -53,7 +54,7 @@ public class DictionaryManagement
         } 
         catch (IOException ex) 
         {
-            System.out.println("Loi ghi file: " + ex);
+            System.out.println("Lỗi ghi file: " + ex);
         }
     }
     
@@ -71,11 +72,12 @@ public class DictionaryManagement
          * 4         dog                             /dɒɡ/                           con chó       
          * .		 ...							 ...							   ...               
          */
-    	dictionary.sort(null);
+    	loadedDatabase.sort(null);
         System.out.format("%-10s%-32s%-32s%-32s%n", "No.", "English", "Pronunciation", "Vietnamese");
-        for (int i = 0; i < dictionary.size(); i++)
+        for (int i = 0; i < loadedDatabase.size(); i++)
         {
-            System.out.format("%-10d%-32s%-32s%-32s%n", i + 1, dictionary.get(i).getWord_target(),dictionary.get(i).getWord_pronounce(), dictionary.get(i).getWord_explain());
+            System.out.format("%-10d", i + 1);
+            loadedDatabase.get(i).printWord();
         }
     }
     
@@ -97,12 +99,12 @@ public class DictionaryManagement
 	    	
 	    	boolean exist = false;
 	    	
-	    	for (int i = 0; i < dictionary.size(); i++) 
+	    	for (int i = 0; i < loadedDatabase.size(); i++) 
 	    	{
-	    		if (dictionary.get(i).getWord_target().equals(lookup))
+	    		if (loadedDatabase.get(i).getWord_target().equals(lookup))
 	    		{
-	    			System.out.println(dictionary.get(i).getWord_pronounce());
-	    			System.out.println(dictionary.get(i).getWord_explain());
+	    			System.out.println(loadedDatabase.get(i).getWord_pronounce());
+	    			System.out.println(loadedDatabase.get(i).getWord_explain());
 	    			exist = true;
 	    			break;
 	    		}
@@ -115,4 +117,27 @@ public class DictionaryManagement
     	}
     }
     
+    //Hàm tìm kiếm tất cả các từ bắt đầu bằng input
+    //có sẵn trong database
+    public ArrayList<Word> dictionarySearch()
+    {
+    	loadedDatabase.sort(null);
+    	ArrayList<Word> matchedWord = new ArrayList<Word>();
+    	try
+    	{
+	    	System.out.print("Nhập từ bạn muốn tìm trong database: ");
+	    	Scanner scan = new Scanner(System.in);
+	    	String input = scan.nextLine();
+	    	
+	    	for (int i = 0; i < loadedDatabase.size(); i++)
+	    		if (loadedDatabase.get(i).getWord_target().indexOf(input) == 0)
+	    			matchedWord.add(loadedDatabase.get(i));
+	    	
+    	}
+    	catch (Exception ex)
+    	{
+    		System.out.println("Lỗi đọc từ command line: " + ex);
+    	}
+    	return matchedWord;
+    }
 }
