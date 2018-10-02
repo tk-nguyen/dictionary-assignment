@@ -26,6 +26,20 @@ public class Word implements Comparable<Word>
     {
     	return word_pronounce;
     }
+
+    public void setWord_target(String word_target) {
+        this.word_target = word_target;
+    }
+
+    public void setWord_explain(String word_explain) {
+        this.word_explain = word_explain;
+    }
+
+    public void setWord_pronounce(String word_pronounce) {
+        this.word_pronounce = word_pronounce;
+    }
+    
+    
     
     @Override
     public int compareTo(Word other)
