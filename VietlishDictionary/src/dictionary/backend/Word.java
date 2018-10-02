@@ -8,6 +8,13 @@ public class Word implements Comparable<Word>
     private String word_explain;
     private String word_pronounce;
 
+    public Word(Word other) 
+    {
+        this.word_target = other.word_target;
+        this.word_pronounce = other.word_pronounce;
+        this.word_explain = other.word_explain;
+    }
+    
     public Word(String word_target, String word_pronounce, String word_explain) {
         this.word_target = word_target;
         this.word_pronounce = word_pronounce;

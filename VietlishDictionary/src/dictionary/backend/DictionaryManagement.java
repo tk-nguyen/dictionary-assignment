@@ -7,7 +7,8 @@ public class DictionaryManagement
 {
     protected Dictionary dict = new Dictionary();
     private ArrayList<Word> dictionary = dict.getDatabase();
-	
+    
+    File file = new File("dictionaries.txt");
     /*
      * Đọc dữ liệu từ file dictionaries.txt
      * Target và meaning ngăn cách bởi tab
@@ -17,9 +18,7 @@ public class DictionaryManagement
     public void insertFromFile()
     {
         try
-        {
-            File file = new File("dictionaries.txt");
-         
+        {         
             Scanner scan = new Scanner(new BufferedReader(new FileReader(file)));
             
             while (scan.hasNext())
@@ -35,7 +34,29 @@ public class DictionaryManagement
             System.out.println("Lỗi đọc file: " + ex);
         }
     }
+    /*
+    Hàm ghi ra file  >>><<<--------CHƯA TEST-------->>><<<
     
+    public void writeToFile()
+    {
+        try 
+        {
+            FileWriter fw = new FileWriter(file);
+            
+            dictionary.sort(null);
+            for(int i = 0; i < dictionary.size(); i++)
+            {
+                Word w = new Word(dictionary.get(i));
+                fw.write(w.getWord_target()    + "\t"
+                        +w.getWord_pronounce() + "\t"
+                        +w.getWord_explain()   + "\n");
+            }
+            fw.close();
+        } catch (IOException ex) {
+            System.out.println("Loi ghi file: " + ex);
+        }
+    }
+    */
     public void showAllWord()
     {   
         //Format lại output để in ra cho thẳng hàng

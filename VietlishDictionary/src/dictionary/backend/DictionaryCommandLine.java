@@ -6,6 +6,7 @@ public class DictionaryCommandLine extends DictionaryManagement
 {
 	
 	//Nhập dữ liệu từ command line
+        //Đây sẽ là hàm addNewWord()
 	public void insertFromCommandLine()
     {
         try 
@@ -31,6 +32,11 @@ public class DictionaryCommandLine extends DictionaryManagement
         }
     }
 	
+        public void fixWord()
+        {
+            
+        }
+        
 	//Hàm gọi các method của DictionaryManagement
 	public void dictionaryAdvanced()
 	{
@@ -38,7 +44,7 @@ public class DictionaryCommandLine extends DictionaryManagement
 		{
 			Scanner scan = new Scanner(System.in);
 			System.out.println("Lựa chọn việc bạn muốn làm: ");
-			System.out.println("1. Nhập file từ database (insertFromFile)");
+			System.out.println("1. Nhập database từ file (insertFromFile)");
 			System.out.println("2. Hiện tất cả từ của từ điển (showAllWord)");
 			System.out.println("3. Tìm một từ trong từ điển (dictionaryLookup)");
 			int choice = scan.nextInt();
