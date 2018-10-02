@@ -34,7 +34,43 @@ public class DictionaryCommandLine extends DictionaryManagement
 	
     public void fixWord()
     {
-            
+        System.out.println("Nhập từ bạn muốn sửa: ");
+        Scanner scan  = new Scanner(System.in);
+        String input = scan.nextLine();
+        System.out.println("Lựa chọn mục bạn muốn sửa: (Nhập số để chọn) ");
+	System.out.println("1. Từ");
+	System.out.println("2. Phiên âm");
+	System.out.println("3. Nghĩa");
+        System.out.println("0. Dừng");
+        int choice = scan.nextInt();
+        if (choice != 0)
+        {
+            System.out.println("Bạn muốn sửa thành: ");
+            String fix = scan.nextLine();
+            if (fix(input, choice, fix))
+            {
+                System.out.println("Từ đã được sửa!");
+            }
+        }
+        
+        
+    }
+    
+    public void deleteWord()
+    {
+        System.out.println("Nhập từ bạn muốn xóa: ");
+        Scanner scan = new Scanner(System.in);
+        String input = scan.nextLine();
+        boolean isDeleted = delete(input);
+        if (isDeleted)
+        {
+            System.out.println("Xóa từ thành công!");
+        } 
+        else
+        {
+            System.out.println("Từ không tồn tại.");
+        }
+        
     }
         
 	//Hàm gọi các method của DictionaryManagement

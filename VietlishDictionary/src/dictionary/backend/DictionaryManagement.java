@@ -5,16 +5,16 @@ import java.io.*;
 
 public class DictionaryManagement 
 {
-	protected Dictionary dict = new Dictionary();
+    protected Dictionary dict = new Dictionary();
     private ArrayList<Word> loadedDatabase = dict.getDatabase();
     protected ArrayList<Word> addToDatabase = new ArrayList<Word>();
     private File file = new File("dictionaries.txt");
+    
     /*
      * Đọc dữ liệu từ file dictionaries.txt
      * Target và meaning ngăn cách bởi tab
      * Sử dụng String.split("\\s+") để tách String thành String[], bỏ tất cả khoảng trắng giữa từ và nghĩa
      */
-    
     public void insertFromFile()
     {
         try
@@ -139,5 +139,75 @@ public class DictionaryManagement
     		System.out.println("Lỗi đọc từ command line: " + ex);
     	}
     	return matchedWord;
+    }
+    
+    public boolean delete(String s)
+    {
+        boolean isDeleted = false;
+        boolean isInLoadedDB = false;
+        for (int i = 0; i < loadedDatabase.size(); i++)
+        {
+            if (s.equals(loadedDatabase.get(i).getWord_target()))
+            {
+                loadedDatabase.remove(i);
+                isDeleted = true;
+                isInLoadedDB = true;
+                break;
+            }
+        }
+        
+        if (!isInLoadedDB)
+        {
+            for (int i = 0; i < addToDatabase.size(); i++)
+            {
+                if (s.equals(addToDatabase.get(i).getWord_target()))
+                {
+                    addToDatabase.remove(i);
+                    isDeleted = true;
+                    break;
+                }
+            }
+        }
+        return isDeleted;
+    }
+    
+    public boolean fix(String s, int n, String fix)
+    {
+        boolean isFix = false;
+        boolean isInLoadedDB = false;
+        for (int i = 0; i < loadedDatabase.size(); i++)
+        {
+            if (s.equals(loadedDatabase.get(i).getWord_target()))
+            {
+                switch (n)
+                {
+                    case 1: loadedDatabase.get(i).setWord_target(fix); break;
+                    case 2: loadedDatabase.get(i).setWord_pronounce(fix); break;
+                    case 3: loadedDatabase.get(i).setWord_explain(fix); break;
+                }
+                isFix = true;
+                isInLoadedDB = true;
+                break;
+            }
+        }
+        
+        if (!isInLoadedDB)
+        {
+            for (int i = 0; i < addToDatabase.size(); i++)
+            {
+                if (s.equals(addToDatabase.get(i).getWord_target()))
+                {
+                    switch (n)
+                    {
+                        case 1: addToDatabase.get(i).setWord_target(fix); break;
+                        case 2: addToDatabase.get(i).setWord_pronounce(fix); break;
+                        case 3: addToDatabase.get(i).setWord_explain(fix); break;
+                    }
+                    isFix = true;
+                    break;
+                }
+            }
+        }
+        return isFix;
     }
 }
