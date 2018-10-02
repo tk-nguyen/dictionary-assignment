@@ -22,7 +22,7 @@ public class DictionaryCommandLine extends DictionaryManagement
 	            String pronounce = input.nextLine();
 	            String meaning = input.nextLine();
 	            
-	            dict.addWord(new Word(word, pronounce, meaning));
+	            addToDatabase.add(new Word(word, pronounce, meaning));
 	        }
 	        
         }
