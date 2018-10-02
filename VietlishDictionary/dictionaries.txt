@@ -3,4 +3,6 @@ pear	/pɛː/	quả lê
 notebook	/ˈnəʊtbʊk/	quyển vở
 bear	/bɛː/ 	con gấu
 dog	/dɒɡ/	con chó
-apple	/ˈap(ə)l/	quả táo
+apple /ˈap(ə)l/ quả táo
+book	/bʊk/	quyển sách
+fish	/fɪʃ/	con cá

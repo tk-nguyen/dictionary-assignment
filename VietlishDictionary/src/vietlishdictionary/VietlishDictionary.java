@@ -7,6 +7,8 @@ public class VietlishDictionary {
     {
         DictionaryCommandLine tuDien = new DictionaryCommandLine();
         
+        tuDien.insertFromCommandLine();
+        tuDien.writeToFile();
         tuDien.dictionaryAdvanced();
     }
     

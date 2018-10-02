@@ -7,8 +7,7 @@ public class DictionaryManagement
 {
     protected Dictionary dict = new Dictionary();
     private ArrayList<Word> dictionary = dict.getDatabase();
-    
-    File file = new File("dictionaries.txt");
+    private File file = new File("dictionaries.txt");
     /*
      * Đọc dữ liệu từ file dictionaries.txt
      * Target và meaning ngăn cách bởi tab
@@ -34,29 +33,30 @@ public class DictionaryManagement
             System.out.println("Lỗi đọc file: " + ex);
         }
     }
-    /*
-    Hàm ghi ra file  >>><<<--------CHƯA TEST-------->>><<<
     
+    
+    //Hàm dùng để thêm từ vào dictionaries.txt
     public void writeToFile()
     {
         try 
         {
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(file, true);
             
-            dictionary.sort(null);
             for(int i = 0; i < dictionary.size(); i++)
             {
-                Word w = new Word(dictionary.get(i));
+                Word w = dictionary.get(i);
                 fw.write(w.getWord_target()    + "\t"
                         +w.getWord_pronounce() + "\t"
                         +w.getWord_explain()   + "\n");
             }
             fw.close();
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex) 
+        {
             System.out.println("Loi ghi file: " + ex);
         }
     }
-    */
+    
     public void showAllWord()
     {   
         //Format lại output để in ra cho thẳng hàng
@@ -89,7 +89,7 @@ public class DictionaryManagement
 	    	String lookup = scan.nextLine();     
 	    	lookup.toLowerCase();
 	    	
-	    	//Bỏ khoảng trắng trong từ mà người dùng nhập vào
+	    	//Bỏ tất cả kí hiệu đặc biệt trong từ mà người dùng nhập vào
 	    	StringBuilder corrected = new StringBuilder();
 	    	for (int i = 0; i < lookup.length(); i++)
 	    		if (Character.isAlphabetic(lookup.charAt(i)) ) corrected.append(lookup.charAt(i));

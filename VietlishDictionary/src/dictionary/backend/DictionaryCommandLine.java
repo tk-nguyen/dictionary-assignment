@@ -6,7 +6,7 @@ public class DictionaryCommandLine extends DictionaryManagement
 {
 	
 	//Nhập dữ liệu từ command line
-        //Đây sẽ là hàm addNewWord()
+	//Đây sẽ là hàm addNewWord()
 	public void insertFromCommandLine()
     {
         try 
@@ -32,10 +32,10 @@ public class DictionaryCommandLine extends DictionaryManagement
         }
     }
 	
-        public void fixWord()
-        {
+    public void fixWord()
+    {
             
-        }
+    }
         
 	//Hàm gọi các method của DictionaryManagement
 	public void dictionaryAdvanced()
