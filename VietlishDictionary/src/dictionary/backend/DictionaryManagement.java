@@ -6,7 +6,7 @@ import java.io.*;
 public class DictionaryManagement 
 {
     protected Dictionary dict = new Dictionary();
-    private ArrayList<Word> loadedDatabase = dict.getDatabase();
+    protected ArrayList<Word> loadedDatabase = dict.getDatabase();
     protected ArrayList<Word> addToDatabase = new ArrayList<Word>();
     private File file = new File("dictionaries.txt");
     
@@ -56,89 +56,6 @@ public class DictionaryManagement
         {
             System.out.println("Lỗi ghi file: " + ex);
         }
-    }
-    
-    public void showAllWord()
-    {   
-        //Format lại output để in ra cho thẳng hàng
-        //Gióng theo hàng dọc bên trái
-        
-        /* Output nhìn sẽ như thế này
-         *	
-         * No.       English                         Pronunciation                   Vietnamese                      
-         * 1         animal                          /ˈanɪm(ə)l/                     động vật                        
-         * 2         apple                           /ˈap(ə)l/                       quả táo                         
-         * 3         bear                            /bɛː/                           con gấu                         
-         * 4         dog                             /dɒɡ/                           con chó       
-         * .		 ...							 ...							   ...               
-         */
-    	loadedDatabase.sort(null);
-        System.out.format("%-10s%-32s%-32s%-32s%n", "No.", "English", "Pronunciation", "Vietnamese");
-        for (int i = 0; i < loadedDatabase.size(); i++)
-        {
-            System.out.format("%-10d", i + 1);
-            loadedDatabase.get(i).printWord();
-        }
-    }
-    
-    public void dictionaryLookup()
-    {
-    	try
-    	{
-    		System.out.print("Viết từ mà bạn cần tra: ");
-    		
-    		Scanner scan = new Scanner(System.in);
-	    	String lookup = scan.nextLine();     
-	    	lookup.toLowerCase();
-	    	
-	    	//Bỏ tất cả kí hiệu đặc biệt trong từ mà người dùng nhập vào
-	    	StringBuilder corrected = new StringBuilder();
-	    	for (int i = 0; i < lookup.length(); i++)
-	    		if (Character.isAlphabetic(lookup.charAt(i)) ) corrected.append(lookup.charAt(i));
-	    	lookup = corrected.toString();
-	    	
-	    	boolean exist = false;
-	    	
-	    	for (int i = 0; i < loadedDatabase.size(); i++) 
-	    	{
-	    		if (loadedDatabase.get(i).getWord_target().equals(lookup))
-	    		{
-	    			System.out.println(loadedDatabase.get(i).getWord_pronounce());
-	    			System.out.println(loadedDatabase.get(i).getWord_explain());
-	    			exist = true;
-	    			break;
-	    		}
-	    	}
-	    	if (!exist)	System.out.println("Không tồn tại từ đó trong từ điển");
-    	}
-    	catch (Exception ex)
-    	{
-    		System.out.println("Lỗi đọc command line: " + ex);
-    	}
-    }
-    
-    //Hàm tìm kiếm tất cả các từ bắt đầu bằng input
-    //có sẵn trong database
-    public ArrayList<Word> dictionarySearch()
-    {
-    	loadedDatabase.sort(null);
-    	ArrayList<Word> matchedWord = new ArrayList<Word>();
-    	try
-    	{
-	    	System.out.print("Nhập từ bạn muốn tìm trong database: ");
-	    	Scanner scan = new Scanner(System.in);
-	    	String input = scan.nextLine();
-	    	
-	    	for (int i = 0; i < loadedDatabase.size(); i++)
-	    		if (loadedDatabase.get(i).getWord_target().indexOf(input) == 0)
-	    			matchedWord.add(loadedDatabase.get(i));
-	    	
-    	}
-    	catch (Exception ex)
-    	{
-    		System.out.println("Lỗi đọc từ command line: " + ex);
-    	}
-    	return matchedWord;
     }
     
     //Hàm để xóa từ có trong database được load
