@@ -141,6 +141,7 @@ public class DictionaryManagement
     	return matchedWord;
     }
     
+    //Hàm để xóa từ có trong database được load
     public boolean delete(String s)
     {
         boolean isDeleted = false;
@@ -156,6 +157,8 @@ public class DictionaryManagement
             }
         }
         
+        //Nếu không có trong database được load
+        //thì tìm trong danh sách từ được thêm vào database
         if (!isInLoadedDB)
         {
             for (int i = 0; i < addToDatabase.size(); i++)
@@ -171,6 +174,7 @@ public class DictionaryManagement
         return isDeleted;
     }
     
+    //Hàm sửa từ có trong database được load
     public boolean fix(String s, int n, String fix)
     {
         boolean isFix = false;
@@ -191,6 +195,9 @@ public class DictionaryManagement
             }
         }
         
+        
+        //Nếu không thấy trong database được load
+        //thì tìm từ đó trong danh sách được add vào database
         if (!isInLoadedDB)
         {
             for (int i = 0; i < addToDatabase.size(); i++)
