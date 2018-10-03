@@ -68,6 +68,7 @@ public class DictionaryManagement
             if (s.equals(loadedDatabase.get(i).getWord_target()))
             {
                 loadedDatabase.remove(i);
+                
                 isDeleted = true;
                 isInLoadedDB = true;
                 break;
@@ -88,6 +89,27 @@ public class DictionaryManagement
                 }
             }
         }
+        
+        //Thay database cũ bằng database đã được sửa đổi
+        try
+		{
+			FileWriter fw = new FileWriter(file);
+			addToDatabase.addAll(loadedDatabase);
+			
+			for(int i = 0; i < addToDatabase.size(); i++)
+            {
+                Word w = addToDatabase.get(i);
+                fw.write(w.getWord_target()    + "\t"
+                        +w.getWord_pronounce() + "\t"
+                        +w.getWord_explain()   + "\n");
+            }
+			addToDatabase.clear();
+			fw.close();
+		} catch (IOException e)
+		{
+			
+			System.out.println("Lỗi viết ra file: " + e);
+		}
         return isDeleted;
     }
     
@@ -132,6 +154,27 @@ public class DictionaryManagement
                 }
             }
         }
+        
+        //Thay database cũ bằng database đã được sửa
+        try
+		{
+			FileWriter fw = new FileWriter(file);
+			addToDatabase.addAll(loadedDatabase);
+			for(int i = 0; i < addToDatabase.size(); i++)
+            {
+                Word w = addToDatabase.get(i);
+                fw.write(w.getWord_target()    + "\t"
+                        +w.getWord_pronounce() + "\t"
+                        +w.getWord_explain()   + "\n");
+            }
+			addToDatabase.clear();
+			fw.close();
+		} 
+        catch (IOException e)
+		{
+			
+			System.out.println("Lỗi viết ra file: " + e);
+		}
         return isFix;
     }
 }

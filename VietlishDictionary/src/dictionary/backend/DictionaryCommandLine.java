@@ -5,25 +5,65 @@ import java.util.Scanner;
 
 public class DictionaryCommandLine extends DictionaryManagement 
 {
-	
+	private Scanner scan = new Scanner(System.in);
 	//Nhập dữ liệu từ command line
 	//Đây sẽ là hàm addNewWord()
 	public void insertFromCommandLine()
     {
         try 
         {
-	    	Scanner input = new Scanner(System.in);
-	        int numberOfWord = input.nextInt();
+	    	System.out.print("Nhập số lượng từ bạn muốn thêm: ");
+        	
+	        int numberOfWord = scan.nextInt();
 	        
-	        input.nextLine();
+	        scan.nextLine();
 	        for (int i = 0; i < numberOfWord; i++)
 	        {
 	            
-	            String word = input.nextLine();
-	            String pronounce = input.nextLine();
-	            String meaning = input.nextLine();
+	        	System.out.print("Nhập từ bạn muốn thêm: ");
+	            String word = scan.nextLine();
 	            
-	            addToDatabase.add(new Word(word, pronounce, meaning));
+	            boolean isInLoadedDB = false;
+	            boolean isInAddingDB = false;
+	            
+	            //Kiểm tra từ nhập vào đã có sẵn hay chưa
+	            for (int j = 0; j < addToDatabase.size(); j++)
+	            {
+	            	if (word.equals(addToDatabase.get(j).getWord_target()))
+	            	{
+	            		isInAddingDB = true;
+	            		System.out.println("Từ đó đã có trong danh sách từ được thêm vào");
+	            		break;
+	            	}
+	            }
+	            
+	            for (int j = 0; j < loadedDatabase.size(); j++)
+	            {
+	            	if (word.equals(loadedDatabase.get(j).getWord_target()))
+	            	{
+	            		isInLoadedDB = true;
+	            		System.out.println("Từ đó đã có trong danh sách từ được load vào");
+	            		break;
+	            	}
+	            }
+	            
+	            //Nếu chưa có sẵn thì thêm vào database
+	            if (!isInAddingDB && !isInLoadedDB)
+	            {
+	            	System.out.print("Nhập phát âm từ bạn muốn thêm: ");
+	            	String pronounce = scan.nextLine();
+	            	System.out.print("Nhập nghĩa của từ bạn muốn thêm: ");
+	            	String meaning = scan.nextLine();
+	            
+	            	addToDatabase.add(new Word(word, pronounce, meaning));
+	            	System.out.println("Thêm từ thành công!");
+	            }
+	            //Còn không thì mời người dùng nhập từ khác
+	            else 
+	            {
+	            	System.out.println("Mời bạn nhập từ khác!");
+	            	i--;
+	            }
 	        }
 	        
         }
@@ -66,11 +106,11 @@ public class DictionaryCommandLine extends DictionaryManagement
         	do 
 	    	{	
 	        	System.out.print("Nhập từ bạn muốn sửa: ");
-		        Scanner scan  = new Scanner(System.in);
+		    
 		        String input = scan.nextLine();
 		        System.out.println("Lựa chọn mục bạn muốn sửa: (Nhập số để chọn) ");
 		        System.out.println("1. Từ");
-		        System.out.println("2. Phiên âm");
+		        System.out.println("2. Phát âm");
 		        System.out.println("3. Nghĩa");
 		        System.out.println("0. Dừng");
 		        int choice = scan.nextInt();
@@ -109,7 +149,7 @@ public class DictionaryCommandLine extends DictionaryManagement
         	do
         	{
 	        	System.out.print("Nhập từ bạn muốn xóa: ");
-		        Scanner scan = new Scanner(System.in);
+		      
 		        String input = scan.nextLine();
 		        boolean isDeleted = delete(input);
 		        if (isDeleted)
@@ -120,7 +160,7 @@ public class DictionaryCommandLine extends DictionaryManagement
 		        {
 		            System.out.println("Từ không tồn tại.");
 		        }
-		        System.out.print("Bạn có muốn sửa tiếp không? (y/n): ");
+		        System.out.print("Bạn có muốn xóa tiếp không? (y/n): ");
 	            cont = scan.nextLine().toLowerCase();
         	} while (cont.equals("y"));
         }
@@ -138,7 +178,6 @@ public class DictionaryCommandLine extends DictionaryManagement
     	{
     		System.out.print("Viết từ mà bạn cần tra: ");
     		
-    		Scanner scan = new Scanner(System.in);
 	    	String lookup = scan.nextLine();     
 	    	lookup.toLowerCase();
 	    	
@@ -154,8 +193,7 @@ public class DictionaryCommandLine extends DictionaryManagement
 	    	{
 	    		if (loadedDatabase.get(i).getWord_target().equals(lookup))
 	    		{
-	    			System.out.println(loadedDatabase.get(i).getWord_pronounce());
-	    			System.out.println(loadedDatabase.get(i).getWord_explain());
+	    			loadedDatabase.get(i).printWord();
 	    			exist = true;
 	    			break;
 	    		}
@@ -177,7 +215,7 @@ public class DictionaryCommandLine extends DictionaryManagement
     	try
     	{
 	    	System.out.print("Nhập từ bạn muốn tìm trong database: ");
-	    	Scanner scan = new Scanner(System.in);
+	    
 	    	String input = scan.nextLine();
 	    	
 	    	for (int i = 0; i < loadedDatabase.size(); i++)
@@ -198,39 +236,56 @@ public class DictionaryCommandLine extends DictionaryManagement
 	{
 		try
 		{
-			Scanner scan = new Scanner(System.in);
-			System.out.println("Lựa chọn việc bạn muốn làm (nhập số để chọn): ");
-			System.out.println("1. Hiện tất cả từ của từ điển (showAllWord)");
-			System.out.println("2. Tìm một từ trong từ điển (dictionaryLookup)");
-			System.out.println("3. Tìm những từ bắt đầu bằng input trong từ điển (dictionarySearch)");
-			System.out.println("4. Xóa một từ trong từ điển (deleteWord)");
-			System.out.println("5. Sửa từ có trong từ điển (fixWord)");
-			int choice = scan.nextInt();
-			
-			switch(choice)
+			String cont = "y";
+			insertFromFile(); 
+			loadedDatabase.sort(null);
+			do
 			{
-				case (1): insertFromFile(); showAllWord(); break;
-				case (2): insertFromFile(); dictionaryLookup(); break;
-				case (3): 
+				System.out.println("Lựa chọn việc bạn muốn làm (nhập số để chọn): ");
+				System.out.println("1. Hiện tất cả từ của từ điển (showAllWord)");
+				System.out.println("2. Tìm một từ trong từ điển (dictionaryLookup)");
+				System.out.println("3. Tìm những từ bắt đầu bằng input trong từ điển (dictionarySearch)");
+				System.out.println("4. Xóa một từ trong từ điển (deleteWord)");
+				System.out.println("5. Sửa từ có trong từ điển (fixWord)");
+				System.out.println("6. Thêm từ mới vào từ điển (insertFromCommandline)");
+				System.out.println("7. Thoát khỏi chương trình");
+				
+				System.out.print("Lựa chọn: ");
+				int choice = scan.nextInt();
+				scan.nextLine();
+				
+				switch(choice)
 				{
-					insertFromFile();
+					case (1): showAllWord(); break;
+					case (2): dictionaryLookup(); break;
+					case (3): 
+					{
+		
+						ArrayList<Word> searchResult = dictionarySearch();
+						for (int i = 0; i < searchResult.size(); i++)
+				        	searchResult.get(i).printWord();
+				        
+				        if (searchResult.isEmpty()) System.out.println("Không tìm được từ đó!");
+				        break;
 	
-					ArrayList<Word> searchResult = dictionarySearch();
-			        for (int i = 0; i < searchResult.size(); i++)
-			        	searchResult.get(i).printWord();
-			        
-			        break;
-
+					}
+					case (4): deleteWord(); break;
+					case (5): fixWord(); break;
+					case (6): insertFromCommandLine(); writeToFile(); break;
+					case (7): System.exit(0);
+					default: break;
 				}
-				case (4): insertFromFile(); deleteWord(); break;
-				case (5): insertFromFile(); fixWord(); break;
-				default: break;
-			}
-			scan.close();
+				System.out.println();
+				
+			} while (cont.equals("y"));
 		}
 		catch (Exception ex)
 		{
 			System.out.println("Lỗi đọc từ command line: " + ex);
+		}
+		finally
+		{
+			scan.close();
 		}
 	}
 }
