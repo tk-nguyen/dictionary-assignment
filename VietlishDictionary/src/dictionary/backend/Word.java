@@ -57,5 +57,9 @@ public class Word implements Comparable<Word>
     	return this.word_target.compareTo(other.word_target);
     }
 
-	
+	@Override
+	public String toString()
+	{
+		return this.word_target;
+	}
 }

@@ -229,7 +229,6 @@ public class DictionaryCommandLine extends DictionaryManagement
     	}
     	return matchedWord;
     }
-    
         
 	//Hàm để thực hiện các thao tác với từ điển
 	public void dictionaryAdvanced()
