@@ -10,8 +10,6 @@ import dictionary.backend.*;
 
 public class VietlishDictionary //extends Application 
 {
-    DictionaryManagement dm = new DictionaryManagement();
-    dm.insertFromFile();
     /*
 	//Phần dùng để khởi động chương trình
 	@Override
@@ -30,9 +28,12 @@ public class VietlishDictionary //extends Application
 			e.printStackTrace();
 		}
 	}
+*/
 	public static void main(String[] args)		
 	{
-		launch(args);
+		DictionaryManagement dm = new DictionaryManagement();
+                dm.insertFromFile();
+                dm.showWords();
 	}
-*/
+
 }

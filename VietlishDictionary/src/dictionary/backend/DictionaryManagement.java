@@ -50,12 +50,13 @@ public class DictionaryManagement
                         }
                         else
                         {
-                            if (explain == null) { explain = explain + line; }
+                            if (explain == "") { explain = explain + line; }
                             else explain = explain + "\n" + line;
                             line = scan.nextLine();
                         }
                     }
-                    dict.addWord(new Word(target, pronounce, explain));                    
+                    Word w = new Word(target, pronounce, explain);
+                    dict.addWord(w);                    
                 }
             scan.close();
         } 
@@ -206,5 +207,15 @@ public class DictionaryManagement
 			System.out.println("Lỗi viết ra file: " + e);
 		}
         return isFix;
+    }
+    
+    public void showWords() 
+    {
+        //loadedDatabase.sort(null);
+        for (int i = 0; i < loadedDatabase.size(); i++)
+        {
+            loadedDatabase.get(i).wordPrint();
+            System.out.println("");
+        }
     }
 }

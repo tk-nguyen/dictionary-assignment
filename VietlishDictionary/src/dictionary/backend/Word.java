@@ -51,6 +51,11 @@ public class Word implements Comparable<Word>
     	System.out.format("%-32s%-32s%-32s%n", this.word_target, this.word_pronounce, this.word_explain);
     }
     
+    public void wordPrint()
+    {
+        System.out.println(this.word_target + "\n" + this.word_pronounce + "\n" + this.word_explain);
+    }
+    
     @Override
     public int compareTo(Word other)
     {
