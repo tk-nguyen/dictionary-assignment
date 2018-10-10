@@ -8,8 +8,11 @@ import javafx.scene.*;
 import dictionary.backend.*;
 
 
-public class VietlishDictionary extends Application 
+public class VietlishDictionary //extends Application 
 {
+    DictionaryManagement dm = new DictionaryManagement();
+    dm.insertFromFile();
+    /*
 	//Phần dùng để khởi động chương trình
 	@Override
 	public void start(Stage primaryStage) 
@@ -31,4 +34,5 @@ public class VietlishDictionary extends Application
 	{
 		launch(args);
 	}
+*/
 }

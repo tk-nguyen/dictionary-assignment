@@ -8,7 +8,7 @@ public class DictionaryManagement
     protected Dictionary dict = new Dictionary();
     protected ArrayList<Word> loadedDatabase = dict.getDatabase();
     protected ArrayList<Word> addToDatabase = new ArrayList<Word>();
-    private File file = new File("dictionaries.txt");
+    private File file = new File("New Dict.txt");
     
     /*
      * Đọc dữ liệu từ file dictionaries.txt
@@ -20,13 +20,43 @@ public class DictionaryManagement
         try
         {         
             Scanner scan = new Scanner(new BufferedReader(new FileReader(file)));
-            
-            while (scan.hasNext())
-            {
-                String w = scan.nextLine();
-                String[] word = w.split("\\s+", 3);
-                dict.addWord(new Word(word[0], word[1], word[2]));
-            }            
+            String line;
+                while (scan.hasNext()) //Đọc đến cuối file
+                {
+                    line = scan.nextLine();
+                    //Khởi tạo các biến
+                    String target = "";
+                    String pronounce = "";
+                    String explain = "";
+                    while (line.trim().length() != 0) //Đọc cho đến dòng trắng, đọc xong thì add rồi đọc tiếp
+                    {
+                        if (line.indexOf("@") == 0)
+                        {
+                            line = line.replace("@", "");
+                            target = line;
+                            line = scan.nextLine();
+                        }
+                        else if (line.indexOf("^") == 0)
+                        {
+                            line = line.replace("^", "");
+                            pronounce = line;
+                            line = scan.nextLine();
+                        }
+                        else if (line.indexOf("$") == 0)
+                        {
+                            line = line.replace("$", "Cách viết/đọc khác: ");
+                            explain = line;
+                            line = scan.nextLine();
+                        }
+                        else
+                        {
+                            if (explain == null) { explain = explain + line; }
+                            else explain = explain + "\n" + line;
+                            line = scan.nextLine();
+                        }
+                    }
+                    dict.addWord(new Word(target, pronounce, explain));                    
+                }
             scan.close();
         } 
         catch (Exception ex)
