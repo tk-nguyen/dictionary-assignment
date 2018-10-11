@@ -55,8 +55,7 @@ public class DictionaryManagement
                             line = scan.nextLine();
                         }
                     }
-                    Word w = new Word(target, pronounce, explain);
-                    dict.addWord(w);                    
+                    dict.addWord(new Word(target, pronounce, explain));                    
                 }
             scan.close();
         } 

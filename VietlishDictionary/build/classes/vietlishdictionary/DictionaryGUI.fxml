@@ -14,7 +14,7 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="wordSearch" promptText="enter your word here..." />
+                  <TextField fx:id="wordSearch" onKeyPressed="#handleEnterButton" promptText="enter your word here..." />
                   <Button fx:id="wordSearchButton" mnemonicParsing="false" text="Lookup!" />
                </children>
             </HBox>

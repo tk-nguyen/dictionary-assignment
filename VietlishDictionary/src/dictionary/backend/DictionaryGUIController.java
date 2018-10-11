@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.*;
 
 
 public class DictionaryGUIController extends DictionaryGUI
@@ -29,7 +30,7 @@ public class DictionaryGUIController extends DictionaryGUI
 	private ObservableList<Word> listOfWords = FXCollections.observableArrayList();
 	
 	//Khi chạy chương trình thì hàm này sẽ chạy
-	//hiện tại đang dùng file dictionaries cũ
+	
 	public void initialize()
 	{
 		insertFromFile();
@@ -43,37 +44,63 @@ public class DictionaryGUIController extends DictionaryGUI
 		showDetails();
 		showSearchResult();
 	}
-	
+
 	//Hiện phát âm và nghĩa của từ đang chọn 
 	//ở danh sách từ 
 	public void showDetails()
 	{
-		wordResult.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Word>()
+		try 
 		{
-			@Override
-			public void changed(ObservableValue<? extends Word> observable, Word oldValue, Word newValue)
+			wordResult.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Word>()
 			{
-				wordDetails.clear();
-				wordDetails.appendText(newValue.getWord_pronounce() + "\n" + newValue.getWord_explain());
-			}
-		});	
+				@Override
+				public void changed(ObservableValue<? extends Word> observable, Word oldValue, Word newValue)
+				{
+					if (newValue != null)
+					{
+						wordDetails.setText(newValue.getWord_target() + "\n" + newValue.getWord_pronounce() + "\n" + newValue.getWord_explain());
+					}
+				}
+			});
+		}
+		catch (Exception ex)
+		{
+			System.out.println(ex);
+		}
 	}
 	
 	//Thay đổi danh sách từ khi gõ vào phần text
 	//để tìm từ gần giống
 	public void showSearchResult()
 	{
-		wordSearch.textProperty().addListener(new ChangeListener<String>()
+		try
 		{
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+			wordSearch.textProperty().addListener(new ChangeListener<String>()
 			{
-				ArrayList<Word> searchResult = dictionarySearch(wordSearch.getText());
-				listOfWords = FXCollections.observableList(searchResult);
-				wordResult.setItems(listOfWords);
-			}
-		});
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+				{
+					ArrayList<Word> searchResult = dictionarySearch(wordSearch.getText());
+					listOfWords = FXCollections.observableList(searchResult);
+					wordResult.setItems(listOfWords);
+				}
+			});
+		}
+		catch (Exception ex)
+		{
+			System.out.println(ex);
+		}
 	}
+	
+	@FXML
+	public void handleEnterButton(KeyEvent key)
+	{
+		if (key.getCode() == KeyCode.ENTER && !listOfWords.isEmpty())
+		{
+			wordResult.getSelectionModel().clearAndSelect(0);
+		}
+	}
+	
 }
 
 
