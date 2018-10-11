@@ -211,7 +211,7 @@ public class DictionaryManagement
     
     public void showWords() 
     {
-        //loadedDatabase.sort(null);
+        loadedDatabase.sort(null);
         for (int i = 0; i < loadedDatabase.size(); i++)
         {
             loadedDatabase.get(i).wordPrint();

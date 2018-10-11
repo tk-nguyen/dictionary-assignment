@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane minHeight="425.0" minWidth="600.0" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.backend.DictionaryGUIController">
+   <left>
+      <VBox prefHeight="500.0" prefWidth="209.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="wordSearch" promptText="enter your word here..." />
+                  <Button fx:id="wordSearchButton" mnemonicParsing="false" text="Lookup!" />
+               </children>
+            </HBox>
+            <ListView fx:id="wordResult" prefHeight="585.0" prefWidth="209.0" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <TextArea fx:id="wordDetails" editable="false" prefHeight="500.0" prefWidth="485.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
