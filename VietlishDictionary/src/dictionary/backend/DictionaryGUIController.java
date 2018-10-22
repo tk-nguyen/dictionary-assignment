@@ -1,14 +1,18 @@
 package dictionary.backend;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
+import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
+import javafx.stage.Stage;
+import javafx.event.*;
 
 
 public class DictionaryGUIController extends DictionaryGUI
@@ -22,9 +26,11 @@ public class DictionaryGUIController extends DictionaryGUI
 	@FXML 
 	private TextArea wordDetails;
 	
-	//TODO Viết hàm cho nút để tìm từ 
 	@FXML
 	private Button searchButton;
+	
+	@FXML
+	private Button infoButton;
 	
 	//Danh sách các từ có trong database
 	private ObservableList<Word> listOfWords = FXCollections.observableArrayList();
@@ -40,7 +46,8 @@ public class DictionaryGUIController extends DictionaryGUI
 	
 		wordResult.setItems(listOfWords);
 		
-		
+		handleInfoButton();
+		handleSearchButton();
 		showDetails();
 		showSearchResult();
 	}
@@ -92,6 +99,8 @@ public class DictionaryGUIController extends DictionaryGUI
 		}
 	}
 	
+	//Khi ấn enter sẽ chọn từ đầu tiên
+	//trong danh sách từ tìm được
 	@FXML
 	public void handleEnterButton(KeyEvent key)
 	{
@@ -101,6 +110,41 @@ public class DictionaryGUIController extends DictionaryGUI
 		}
 	}
 	
+	//Cho nút search giống như ấn enter
+	public void handleSearchButton()
+	{
+		searchButton.setOnAction(new EventHandler<ActionEvent>() 
+		{
+			@Override 
+			public void handle(ActionEvent e) 
+			{
+				wordResult.getSelectionModel().clearAndSelect(0);
+			}	
+		});
+	}
+	
+	public void handleInfoButton()
+	{
+		infoButton.setOnAction(new EventHandler<ActionEvent>() 
+		{
+			@Override 
+			public void handle(ActionEvent e) 
+			{
+				try
+				{
+					Parent root = FXMLLoader.load(getClass().getResource("/vietlishdictionary/InfoWindow.fxml"));
+					Stage stage = new Stage();
+		            stage.setTitle("About");
+		            stage.setScene(new Scene(root, 270, 60));
+		            stage.show();
+				}
+				catch (IOException ex)
+				{
+					System.out.println(ex);
+				}
+			}	
+		});
+	}
 }
 
 

@@ -4,6 +4,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -14,8 +16,15 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="wordSearch" onKeyPressed="#handleEnterButton" promptText="enter your word here..." />
-                  <Button fx:id="wordSearchButton" mnemonicParsing="false" text="Lookup!" />
+                  <TextField fx:id="wordSearch" onKeyPressed="#handleEnterButton" prefHeight="31.0" prefWidth="179.0" promptText="enter your word here..." />
+                  <Button fx:id="searchButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="28.0" prefWidth="45.0">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@magnifying_glass.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </HBox>
             <ListView fx:id="wordResult" prefHeight="585.0" prefWidth="209.0" />
@@ -25,4 +34,14 @@
    <center>
       <TextArea fx:id="wordDetails" editable="false" prefHeight="500.0" prefWidth="485.0" BorderPane.alignment="CENTER" />
    </center>
+   <top>
+      <ImageView fitHeight="51.0" fitWidth="700.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@TitleImage.png" />
+         </image>
+      </ImageView>
+   </top>
+   <bottom>
+      <Button fx:id="infoButton" mnemonicParsing="false" text="About" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
