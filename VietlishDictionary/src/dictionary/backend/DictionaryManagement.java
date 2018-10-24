@@ -2,6 +2,7 @@ package dictionary.backend;
 
 import java.util.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class DictionaryManagement 
 {
@@ -19,7 +20,7 @@ public class DictionaryManagement
     {
         try
         {         
-            Scanner scan = new Scanner(new BufferedReader(new FileReader(file)));
+            Scanner scan = new Scanner(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
             String line;
                 while (scan.hasNext()) //Đọc đến cuối file
                 {
