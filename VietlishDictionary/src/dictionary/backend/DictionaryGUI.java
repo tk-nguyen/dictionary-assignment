@@ -16,5 +16,4 @@ public class DictionaryGUI extends DictionaryManagement
     	return matchedWord;
     }
     
-    //TODO Viết lại insertFromFile cho database dạng mới
 }

@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class DeleteWindowController {
     
@@ -37,7 +38,8 @@ public class DeleteWindowController {
             Scene scene = new Scene(root); 
             Stage primaryStage = new Stage();
             primaryStage.setScene(scene);    
-
+            primaryStage.setTitle("Vietlish Dictionary");
+            
             primaryStage.show();
             controller.deletedWord.add(w_target);
             controller.refreshListView();
