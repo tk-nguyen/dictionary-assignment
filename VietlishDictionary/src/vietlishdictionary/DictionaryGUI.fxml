@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -24,10 +26,38 @@
                               <Image url="@magnifying_glass.png" />
                            </image>
                         </ImageView>
-                     </graphic></Button>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Tìm kiếm" />
+                     </tooltip></Button>
                </children>
             </HBox>
             <ListView fx:id="wordResult" prefHeight="585.0" prefWidth="209.0" />
+            <HBox prefHeight="21.0" prefWidth="209.0">
+               <children>
+                  <Button fx:id="addButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="105.0" text="Thêm từ">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@plus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="105.0" text="Xóa từ">
+                     <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@minus2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </left>
@@ -42,6 +72,6 @@
       </ImageView>
    </top>
    <bottom>
-      <Button fx:id="infoButton" mnemonicParsing="false" text="About" BorderPane.alignment="CENTER" />
+      <Button fx:id="infoButton" mnemonicParsing="false" text="About" textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>

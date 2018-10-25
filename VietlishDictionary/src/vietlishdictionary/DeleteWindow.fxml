@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.backend.DeleteWindowController">
+   <center>
+      <VBox prefHeight="75.0" prefWidth="402.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="22.0" prefWidth="76.0" text="Từ muốn xóa :" />
+            <TextField fx:id="Word" promptText="Nhập từ vào đây" />
+            <Button fx:id="Delete" mnemonicParsing="false" onAction="#deleteWord" prefHeight="25.0" prefWidth="499.0" text="Xóa" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

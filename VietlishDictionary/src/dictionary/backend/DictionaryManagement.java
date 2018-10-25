@@ -7,8 +7,8 @@ public class DictionaryManagement
 {
     protected Dictionary dict = new Dictionary();
     protected ArrayList<Word> loadedDatabase = dict.getDatabase();
-    protected ArrayList<Word> addToDatabase = new ArrayList<Word>();
-    private File file = new File("New Dict.txt");
+    protected ArrayList<Word> addToDatabase = new ArrayList<>();
+    private final File file = new File("New Dict.txt");
     
     /*
      * Đọc dữ liệu từ file dictionaries.txt

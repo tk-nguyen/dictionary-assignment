@@ -31,10 +31,17 @@ public class DictionaryGUIController extends DictionaryGUI
 	
 	@FXML
 	private Button infoButton;
-	
+        
+        @FXML
+        private Button addButton;
+
+        @FXML
+        private Button deleteButton;
+        
 	//Danh sách các từ có trong database
 	private ObservableList<Word> listOfWords = FXCollections.observableArrayList();
-	
+        public static ArrayList<Word> addByUser = new ArrayList<>();
+        public static ArrayList<String> deletedWord = new ArrayList<>();	
 	//Khi chạy chương trình thì hàm này sẽ chạy
 	
 	public void initialize()
@@ -43,13 +50,15 @@ public class DictionaryGUIController extends DictionaryGUI
 		loadedDatabase.sort(null);
 		for (int i = 0; i < loadedDatabase.size(); i++)
 			listOfWords.add(loadedDatabase.get(i));
-	
+                                
 		wordResult.setItems(listOfWords);
 		
 		handleInfoButton();
 		handleSearchButton();
 		showDetails();
 		showSearchResult();
+                handleAddButton();
+                handleDeleteButton();
 	}
 
 	//Hiện phát âm và nghĩa của từ đang chọn 
@@ -134,9 +143,9 @@ public class DictionaryGUIController extends DictionaryGUI
 				{
 					Parent root = FXMLLoader.load(getClass().getResource("/vietlishdictionary/InfoWindow.fxml"));
 					Stage stage = new Stage();
-		            stage.setTitle("About");
-		            stage.setScene(new Scene(root, 270, 60));
-		            stage.show();
+                                        stage.setTitle("About");
+                                        stage.setScene(new Scene(root, 270, 60));
+                                        stage.show();
 				}
 				catch (IOException ex)
 				{
@@ -145,6 +154,93 @@ public class DictionaryGUIController extends DictionaryGUI
 			}	
 		});
 	}
+        
+        public void handleAddButton()
+        {
+            addButton.setOnAction(new EventHandler<ActionEvent>() 
+		{
+			@Override 
+			public void handle(ActionEvent e) 
+			{
+				try
+				{
+					Parent root2 = FXMLLoader.load(getClass().getResource("/vietlishdictionary/AddWindow.fxml"));
+					Stage stage = new Stage();
+                                        stage.setTitle("Add Word");
+                                        stage.setScene(new Scene(root2, 350, 180));
+                                        
+                                        Stage s2 = (Stage) deleteButton.getScene().getWindow();
+                                        s2.close();
+                                        
+                                        stage.show();
+				}
+				catch (IOException ex)
+				{
+					System.out.println(ex);
+				}
+			}	
+		});
+        }
+        
+        public void handleDeleteButton()
+        {
+            deleteButton.setOnAction(new EventHandler<ActionEvent>()
+            {
+                @Override
+                public void handle(ActionEvent event) {
+                    try
+				{
+					Parent root3 = FXMLLoader.load(getClass().getResource("/vietlishdictionary/DeleteWindow.fxml"));
+					Stage stage = new Stage();
+                                        stage.setTitle("Delete");
+                                        stage.setScene(new Scene(root3, 400, 70));
+                                        
+                                        Stage s2 = (Stage) deleteButton.getScene().getWindow();
+                                        s2.close();
+                                        
+                                        stage.show();
+				}
+				catch (IOException ex)
+				{
+					System.out.println(ex);
+				}
+                }
+                
+            });
+        }
+        
+        public void addWord(Word w)
+        {
+            Word newWord = new Word(w);
+            listOfWords.add(newWord);
+            wordResult.refresh();
+        }
+        
+        public void deleteAddedWord()               
+        {
+            for (int j = 0; j < deletedWord.size(); j++)
+            {
+                for (int i = 0; i < loadedDatabase.size(); i++)
+                {
+                    if(loadedDatabase.get(i).getWord_target().equals(deletedWord.get(j)))
+                    {
+                        loadedDatabase.remove(i);
+                        i--;
+                    }
+                }
+            }
+            
+        }
+        
+        public void refreshListView()
+        {
+            loadedDatabase.addAll(addByUser);
+            deleteAddedWord();
+            loadedDatabase.sort(null);
+            listOfWords = FXCollections.observableList(loadedDatabase);
+            wordResult.setItems(listOfWords);
+            wordResult.refresh();
+        }
 }
 
 
