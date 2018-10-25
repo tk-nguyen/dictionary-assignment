@@ -10,7 +10,7 @@
    <center>
       <VBox prefHeight="75.0" prefWidth="402.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="22.0" prefWidth="76.0" text="Từ muốn xóa :" />
+            <Label prefHeight="21.0" prefWidth="400.0" text="Từ muốn xóa : (Để trống và ấn xóa nếu không muốn xóa từ nào)" />
             <TextField fx:id="Word" promptText="Nhập từ vào đây" />
             <Button fx:id="Delete" mnemonicParsing="false" onAction="#deleteWord" prefHeight="25.0" prefWidth="499.0" text="Xóa" />
          </children>

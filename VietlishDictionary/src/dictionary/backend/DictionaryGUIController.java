@@ -163,10 +163,12 @@ public class DictionaryGUIController extends DictionaryGUI
 			{
 				try
 				{
+                                        Stage s2 = (Stage) addButton.getScene().getWindow();                                    
 					Parent root2 = FXMLLoader.load(getClass().getResource("/vietlishdictionary/AddWindow.fxml"));
 					Stage stage = new Stage();
 					stage.setTitle("Thêm từ...");
-					stage.setScene(new Scene(root2, 350, 180));
+					stage.setScene(new Scene(root2, 350, 220));
+                                        s2.close();
 					stage.show();
 				} catch (IOException ex)
 				{
@@ -186,13 +188,12 @@ public class DictionaryGUIController extends DictionaryGUI
 			{
 				try
 				{
+                                        Stage s2 = (Stage) deleteButton.getScene().getWindow();
 					Parent root3 = FXMLLoader.load(getClass().getResource("/vietlishdictionary/DeleteWindow.fxml"));
 					Stage stage = new Stage();
 					stage.setTitle("Xóa từ...");
 					stage.setScene(new Scene(root3, 400, 70));
-
-					Stage s2 = (Stage) deleteButton.getScene().getWindow();
-			
+					s2.close();			
 					stage.show();
 				} catch (IOException ex)
 				{

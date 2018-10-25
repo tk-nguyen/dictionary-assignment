@@ -49,10 +49,28 @@ public class AddWindowController
 			@Override
 			public void handle(ActionEvent e)
 			{
-				if (Word.getText().isEmpty() || Pronounce.getText().isEmpty() || Explain.getText().isEmpty())
+                            if (Word.getText().isEmpty() && Pronounce.getText().isEmpty() && Explain.getText().isEmpty())
+                            {
+                                try {
+                                    Stage stage = (Stage) Submit.getScene().getWindow();
+                                    FXMLLoader fxmlLoader = new FXMLLoader(
+                                            getClass().getResource("/vietlishdictionary/DictionaryGUI.fxml"));
+                                    Parent root = (Parent) fxmlLoader.load();
+                                    Scene scene = new Scene(root);
+                                    Stage primaryStage = new Stage();
+                                    primaryStage.setTitle("Vietlish Dictionary");
+                                    primaryStage.setScene(scene);
+                                    primaryStage.show();
+                                    stage.close();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(AddWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }                                
+                            else if (Word.getText().isEmpty() || Pronounce.getText().isEmpty() || Explain.getText().isEmpty())
 				{
 					Notification.setText("Bạn nhập thiếu dữ liệu!");
-				} else
+				}
+                            else
 				{
 					try
 					{

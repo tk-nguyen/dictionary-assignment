@@ -25,6 +25,25 @@ public class DeleteWindowController {
     
     @FXML
     void deleteWord(ActionEvent event) {
+        if (Word.getText().isEmpty())
+        {
+            try {
+                Stage stage = (Stage) Delete.getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(
+                        getClass().getResource("/vietlishdictionary/DictionaryGUI.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                Scene scene = new Scene(root);
+                Stage primaryStage = new Stage();
+                primaryStage.setTitle("Vietlish Dictionary");
+                primaryStage.setScene(scene);
+                primaryStage.show();
+                stage.close();
+            } catch (IOException ex) {
+                Logger.getLogger(DeleteWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+        {
         try {
             Stage stage = (Stage) Delete.getScene().getWindow();
             w_target = Word.getText();
@@ -47,5 +66,5 @@ public class DeleteWindowController {
         } catch (IOException ex) {
             Logger.getLogger(DeleteWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }}
 }
