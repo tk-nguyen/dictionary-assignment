@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.*;
 
-import dictionary.backend.*;
-
 
 public class VietlishDictionary extends Application 
 {
